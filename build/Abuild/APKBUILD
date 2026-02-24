@@ -1,0 +1,27 @@
+# Maintainer: Aaron Bassett <abassett@qnx.com>
+pkgname=liblocale-shim
+pkgver=0.1.0
+pkgrel=2
+pkgdesc="Felix's locale.h shim"
+url="https://qnx.com"
+arch="all"
+license="LicenseRef-QDL-Non-Commercial"
+options="!check"
+subpackages="$pkgname-dev"
+source="liblocale.tar.gz
+    "
+builddir="$srcdir"/liblocale
+build() {
+    ./make.sh
+}
+
+package() {
+    mkdir -p "$pkgdir"/usr
+
+    cd "$builddir"
+    PREFIX="$pkgdir"/usr ./install.sh
+}
+
+sha512sums="
+486625ed17864559e27c1a92b92acd8665dec659db761bc1da9a2ae524fd851219ee732f9325cdd8a14969fb49aadfefaeca442271eb56a53ac372721f7b7019  liblocale.tar.gz
+"
